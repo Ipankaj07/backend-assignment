@@ -1,0 +1,137 @@
+/* 
+
+show dbs
+
+use collection
+
+(1)-- Insert 10 documents in this users collection using both insert and insertMany --
+
+db.users.insert({first_name:"Pankaj", last_name:"Raj", email:"Praj4936@gmail.com", gender:"Male", ip_address:"127.0.01.07", age:19})
+
+db.users.find().count()
+> 1
+
+db.users.insertMany([{
+...   "first_name": "Jeffrey",
+...   "last_name": "Charnick",
+...   "email": "jcharnick0@altervista.org",
+...   "gender": "Non-binary",
+...   "ip_address": "0.166.159.231",
+...   "age": 88
+... }, {
+...   "first_name": "Sophronia",
+...   "last_name": "Rosingdall",
+...   "email": "srosingdall1@gravatar.com",
+...   "gender": "Male",
+...   "ip_address": "87.156.51.179",
+...   "age": 67
+... }, {
+...   "first_name": "Glennie",
+...   "last_name": "Coupar",
+...   "email": "gcoupar2@stumbleupon.com",
+...   "gender": "Male",
+...   "ip_address": "160.243.252.57",
+...   "age": 29
+... }, {
+...   "first_name": "Ches",
+...   "last_name": "Dallaway",
+...   "email": "cdallaway3@youtube.com",
+...   "gender": "Polygender",
+...   "ip_address": "211.123.196.63",
+...   "age": 9
+... }, {
+...   "first_name": "Jeri",
+...   "last_name": "Nobbs",
+...   "email": "jnobbs4@nydailynews.com",
+...   "gender": "Polygender",
+...   "ip_address": "128.140.187.14",
+...   "age": 36
+... }, {
+...   "first_name": "Ronda",
+...   "last_name": "Ferrini",
+...   "email": "rferrini5@answers.com",
+...   "gender": "Bigender",
+...   "ip_address": "199.145.154.252",
+...   "age": 99
+... }, {
+...   "first_name": "Fawn",
+...   "last_name": "Baxster",
+...   "email": "fbaxster6@google.cn",
+...   "gender": "Non-binary",
+...   "ip_address": "190.14.42.9",
+...   "age": 54
+... }, {
+...   "first_name": "Eduardo",
+...   "last_name": "Wenzel",
+...   "email": "ewenzel7@dailymotion.com",
+...   "gender": "Polygender",
+...   "ip_address": "94.238.0.101",
+...   "age": 13
+... }, {
+...   "first_name": "Briant",
+...   "last_name": "Musprat",
+...   "email": "bmusprat8@microsoft.com",
+...   "gender": "Male",
+...   "ip_address": "107.208.188.29",
+...   "age": 75
+... }, {
+...   "first_name": "Abbott",
+...   "last_name": "Velasquez",
+...   "email": "avelasquez9@youtu.be",
+...   "gender": "Polygender",
+...   "ip_address": "45.225.70.117",
+...   "age": 90
+... }])
+
+db.users.find().count()
+> 11
+
+
+(2) -- Select all the documents in the users collection using find and also a single document using findOne
+
+db.users.find()
+> return an array, even if no documents match the search criteria. An empty array still exists, so it will act as truthy.
+
+
+db.users.findOne()
+>  return exactly one document, or undefined.
+
+
+(3) -- Update at least 3 documents using update and updateMany
+
+db.users.update({"_id" : ObjectId("619ced7841597cb497c21720")}, {$set :{first_name:"Rishikesh", last_name:"Kumar", email:"Praj4936@gmail.com", gender:"Male", ip_address:"127.0.01.07", age:19}})
+>  WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+db.users.updateMany({"gender" : "Male"}, {$set :{ip_address:"127.0.01.07"}})
+>  { "acknowledged" : true, "matchedCount" : 4, "modifiedCount" : 3 }
+
+
+(4) -- Delete documents using remove, remove that will remove just 1 document, deleteOne, deleteMany
+
+db.users.remove({first_name:"Abbott"})
+
+db.users.find().count()
+> 10
+
+db.users.deleteOne({"age":13})
+> { "acknowledged" : true, "deletedCount" : 1 }
+
+db.users.find().count()
+> 9
+
+db.users.deleteMany({"ip_address":"127.0.01.07"})
+> { "acknowledged" : true, "deletedCount" : 4 }
+
+db.users.find().count()
+> 5
+
+
+(5) -- Then delete the database
+
+db.users.drop()
+> true
+
+db.users.find().count()
+> 0
+
+*/
