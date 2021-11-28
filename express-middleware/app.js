@@ -6,10 +6,10 @@ const books = require("./books_data.json");
 
 app.use(express.json());
 
-const authenticate = (req, res, next) => {
-  console.log("Authenticating");
-  next();
-};
+// const authenticate = (req, res, next) => {
+//   console.log("Authenticating");
+//   next();
+// };
 
 let name = "Pankaj Raj";
 
