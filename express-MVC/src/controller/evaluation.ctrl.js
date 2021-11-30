@@ -38,6 +38,32 @@ router.get("", async (req, res) => {
   }
 });
 
+//student who persent in evalution
+
+router.get("/persentstudent", async (req, res) => {
+  try {
+    const evaluations = await Evaluation.find({ attendence: { $eq: true } })
+      .populate("student_id")
+      .populate({
+        path: "student_id",
+        populate: {
+          path: "user_id",
+        },
+      })
+      .lean()
+      .exec();
+    res.status(200).json({
+      success: true,
+      data: evaluations,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      error: err.message,
+    });
+  }
+});
+
 router.get("/:id", async (req, res) => {
   try {
     const evaluations = await Evaluation.findById(req.params.id);

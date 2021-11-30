@@ -29,7 +29,9 @@ router.get("", async (req, res) => {
             path: "user_id",
           },
         },
-      });
+      })
+      .lean()
+      .exec();
     res.status(200).json({
       success: true,
       data: results,
@@ -42,11 +44,25 @@ router.get("", async (req, res) => {
   }
 });
 
-// get max marks of student in results collection
+// the student with his personal details who scored the highest mark in the evaluation
 
 router.get("/marks", async (req, res) => {
   try {
-    const results = await Result.find().sort({ marks: -1 }).lean().exec();
+    const results = await Result.find()
+      .sort({ marks: -1 })
+      .limit(3)
+      .populate("evaluation_id")
+      .populate({
+        path: "evaluation_id",
+        populate: {
+          path: "student_id",
+          populate: {
+            path: "user_id",
+          },
+        },
+      })
+      .lean()
+      .exec();
     res.status(200).json({
       success: true,
       data: results,
