@@ -40,13 +40,13 @@ router.post(
     return true;
   }),
   body("pincode")
-    .isNumeric()
+    // .isNumeric()
     .isLength({ min: 6, max: 6 })
     .withMessage("Pincode must be 6 digits"),
   body("age").custom((value) => {
     const isAge = /^[0-9]*$/.test(value);
     if (!isAge) {
-      throw new Error("Age not be in negative");
+      throw new Error("Age not be in negative or you put invalid formate");
     } else if (value < 1 || value > 100) {
       throw new Error("Age must be between 1 and 100");
     }
