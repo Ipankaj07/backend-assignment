@@ -14,7 +14,7 @@ router.post(
     .isLength({ min: 3, max: 20 })
     .withMessage("Last name is required and minimum be in 3 characters"),
   body("email").custom(async (value) => {
-    const isEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,5})+$/.test(value);
+    const isEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$/.test(value);
     const listOfDmains = [
       "masai.school",
       "gmail.com",
